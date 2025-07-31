@@ -1,10 +1,13 @@
 import com.varabyte.kobweb.gradle.application.util.configAsKobwebApplication
+import kotlinx.html.link
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
+    alias(libs.plugins.kotlin.serialization)
+
 }
 
 group = "org.app.nocodefolio"
@@ -14,6 +17,28 @@ kobweb {
     app {
         index {
             description.set("Powered by Kobweb")
+            head.add{
+                link( rel="preconnect", href="https://fonts.googleapis.com")
+                link( rel="preconnect",href="https://fonts.gstatic.com") {attributes["crossorigin"] = ""}
+                link( href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap", rel="stylesheet")
+            }
+        }
+    }
+}
+
+repositories {
+    /* ... other repositories ... */
+    maven(url = "https://jitpack.io")
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    google()
+    mavenCentral()
+    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven("https://maven.pkg.jetbrains.space/public/p/kotlin/dev")
+    maven("https://maven.pkg.jetbrains.space/varabyte/p/kobweb/maven")
+    mavenLocal()
+    mavenLocal {
+        content {
+            includeGroup("dev.bitspittle")
         }
     }
 }
@@ -24,18 +49,21 @@ kotlin {
     configAsKobwebApplication("nocodefolio" /*, includeServer = true*/)
 
     sourceSets {
-//        commonMain.dependencies {
-//          // Add shared dependencies between JS and JVM here if building a fullstack app
-//        }
-
+        commonMain.dependencies {
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kobwebx.serialization.kotlinx)
+        }
+        js(IR){ }
         jsMain.dependencies {
+
+            implementation("dev.bitspittle:firebase-kotlin-bindings:+")
+           // implementation("com.github.stevdza-san:KotlinBootstrap:0.1.6")
+
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)
             implementation(libs.kobweb.silk)
-            // This default template uses built-in SVG icons, but what's available is limited.
-            // Uncomment the following if you want access to a large set of font-awesome icons:
-            // implementation(libs.silk.icons.fa)
+            implementation(libs.silk.icons.fa)
             implementation(libs.kobwebx.markdown)
         }
 

@@ -1,6 +1,8 @@
 package org.app.nocodefolio
 
+import com.varabyte.kobweb.compose.css.BackgroundColor
 import com.varabyte.kobweb.compose.css.ScrollBehavior
+import com.varabyte.kobweb.compose.css.StyleVariable
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -29,22 +31,46 @@ fun initSiteStyles(ctx: InitSilkContext) {
             Modifier.scrollBehavior(ScrollBehavior.Smooth)
         }
     }
-
     ctx.stylesheet.registerStyleBase("body") {
         Modifier
             .fontFamily(
-                "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+                "lexend","-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
                 "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif"
             )
             .fontSize(18.px)
             .lineHeight(1.5)
+
     }
 
     // Silk dividers only extend 90% by default; we want full width dividers in our site
     ctx.theme.modifyStyleBase(HorizontalDividerStyle) {
         Modifier.fillMaxWidth()
     }
+
+    ctx.stylesheet.registerStyle("body") {
+        cssRule("::-webkit-scrollbar") {
+            Modifier
+                .width(4.px)
+                .height(6.px)
+                .backgroundColor(Colors.Transparent)
+        }
+        cssRule("::-webkit-scrollbar-thumb") {
+            Modifier
+                .borderRadius(10.px)
+                .backgroundColor(ScrollbarThumbColor.value())
+        }
+        cssRule("::-webkit-scrollbar-corner") {
+            Modifier
+                .backgroundColor(BackgroundColor.Transparent)
+        }
+    }
+
+
 }
+
+// To be Set in AppEntry
+val ScrollbarThumbColor by StyleVariable<CSSColorValue>()
+
 
 val HeadlineTextStyle = CssStyle.base {
     Modifier

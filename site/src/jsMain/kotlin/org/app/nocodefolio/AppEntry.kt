@@ -18,6 +18,11 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.loadFromLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import com.varabyte.kobweb.silk.theme.colors.systemPreference
+import dev.bitspittle.firebase.app.FirebaseApp
+import dev.bitspittle.firebase.app.FirebaseOptions
+import dev.bitspittle.firebase.database.value
+import kotlin.js.Json
+import kotlin.js.json
 
 private const val COLOR_MODE_KEY = "nocodefolio:colorMode"
 
