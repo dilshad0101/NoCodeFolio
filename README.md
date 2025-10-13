@@ -23,8 +23,11 @@ The goal of these bindings are to provide a clean, Kotlin-idiomatic view of Fire
 
 ## Setup
 
-At the moment, this library is not published anywhere. To use it, clone this project, and then run
+At the moment, this library is not published anywhere. To use it,
 
+```bash
+$ git clone https://github.com/bitspittle/firebase-kotlin-bindings.git
+```
 ```bash
 $ cd firebase-kotlin-binding
 ```
