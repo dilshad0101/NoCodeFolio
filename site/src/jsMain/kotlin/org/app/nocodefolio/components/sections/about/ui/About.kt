@@ -16,7 +16,7 @@ import com.varabyte.kobweb.silk.components.layout.numColumns
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.app.nocodefolio.components.models.Skill
+import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.sections.about.components.SkillItem
 import org.app.nocodefolio.components.sections.about.style.AboutDiscriptionStyle
 import org.app.nocodefolio.components.sections.about.style.AboutStyle
@@ -25,7 +25,9 @@ import org.app.nocodefolio.components.utils.Res
 import org.app.nocodefolio.components.widgets.SectionTitle
 
 @Composable
-fun About() {
+fun About(
+    userData: UserData
+) {
     Column (
         modifier = AboutStyle.toModifier().id("about"),
         verticalArrangement = Arrangement.Center,
@@ -36,7 +38,7 @@ fun About() {
         SectionTitle(Res.Title.ABOUT)
 
         SpanText(
-            text = Res.Constants.ABOUT_ME_TEXT,
+            text = userData.about,
             modifier = AboutDiscriptionStyle.toModifier()
                 .color(
                     when (ColorMode.current) {
@@ -58,7 +60,7 @@ fun About() {
                 ,
                 numColumns = numColumns(base = 2, md = 5, lg = 5)
             ) {
-                Skill.entries.forEach { skill ->
+                userData.skills.forEach { skill ->
                     SkillItem(
                         skill = skill,
                     )

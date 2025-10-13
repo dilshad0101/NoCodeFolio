@@ -74,9 +74,8 @@ fun Home(
 
 
             )
-
             SpanText(
-                text = Res.Constants.SUB_HEADLINE,
+                text = userData.about,
                 modifier = UsersMessageStyle.toModifier()
                     .color(currentPalette.subHeadLine)
 

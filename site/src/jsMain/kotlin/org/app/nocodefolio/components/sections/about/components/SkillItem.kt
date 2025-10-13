@@ -13,8 +13,9 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.app.nocodefolio.components.data.Skill
+import org.app.nocodefolio.components.data.UserData
 import org.jetbrains.compose.web.css.cssRem
-import org.app.nocodefolio.components.models.Skill
 import org.app.nocodefolio.components.sections.about.style.SkillItemImageVariant
 import org.app.nocodefolio.components.styles.SkillProficiencyTextStyle
 import org.app.nocodefolio.components.styles.SkillTextStyle
@@ -32,7 +33,7 @@ fun SkillItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(
-            src = if (colorMode.isLight) skill.iconResLight else skill.iconResDark,
+            src = skill.iconUrl,
             variant = SkillItemImageVariant,
         )
         Column(
@@ -42,11 +43,11 @@ fun SkillItem(
         ) {
 
             SpanText(
-                text = skill.skillName,
+                text = skill.name,
                 modifier = SkillTextStyle.toModifier()
             )
             SpanText(
-                text = skill.level,
+                text = skill.skillLevel,
                 modifier = SkillProficiencyTextStyle.toModifier()
                     .color(
                     when (ColorMode.current) {

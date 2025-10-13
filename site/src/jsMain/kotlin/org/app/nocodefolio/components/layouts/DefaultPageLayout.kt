@@ -24,7 +24,6 @@ import org.app.nocodefolio.components.sections.footer.ui.Footer
 import musaib.components.sections.navHeader.ui.NavHeader
 import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.data.readUserData
-import org.app.nocodefolio.components.data.user
 import org.app.nocodefolio.components.utils.Res
 import org.app.nocodefolio.components.widgets.SVGHeroBackround
 import org.jetbrains.compose.web.css.Position

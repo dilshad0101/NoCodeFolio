@@ -50,6 +50,13 @@ fun SocialLinksRow(
         val whatsapp = userData.socials.find { social -> social.name.lowercase() == "whatsapp" }?.redirectUrl
         val telegram = userData.socials.find { social -> social.name.lowercase() == "telegram" }?.redirectUrl
         val instagram = userData.socials.find { social -> social.name.lowercase() == "instagram" }?.redirectUrl
+        val github = userData.socials.find { social -> social.name.lowercase() == "github" }?.redirectUrl
+        val twitter = userData.socials.find { social -> social.name.lowercase() == "twitter" }?.redirectUrl
+        val hackerrank = userData.socials.find { social -> social.name.lowercase() == "hackerrank" }?.redirectUrl
+        val medium = userData.socials.find { social -> social.name.lowercase() == "medium" }?.redirectUrl
+
+
+
 
 
 
@@ -58,28 +65,37 @@ fun SocialLinksRow(
             Breakpoint.ZERO, Breakpoint.SM, Breakpoint.MD -> IconSize.X3
             else -> IconSize.X3
         }
-        SocialLinkButton(
-            Res.Constants.LINKEDIN_URL
-        ) { FaLinkedin(size = iconSize) }
 
-        SocialLinkButton(
-            Res.Constants.GITHUB_URL
-        ) { FaGithub(size = iconSize) }
+        linkedin?.let {
+            SocialLinkButton(
+                it
+            ) { FaLinkedin(size = iconSize) }
+        }
 
-        SocialLinkButton(
-            Res.Constants.TWITTER_URL
+        github?.let {
+            SocialLinkButton(
+                it
+            ) { FaGithub(size = iconSize) }
+        }
 
-        ) { FaXTwitter(size = iconSize) }
+        twitter?.let {
+            SocialLinkButton(
+                it
 
-        SocialLinkButton(
-            Res.Constants.HACKER_RANK_URL
+            ) { FaXTwitter(size = iconSize) }
+        }
 
-        ) { FaHackerrank(size = iconSize) }
+        hackerrank?.let {
+            SocialLinkButton(
+                it
+            ) { FaHackerrank(size = iconSize) }
+        }
 
-        SocialLinkButton(
-            Res.Constants.MEDIUM_URL
-
-        ) { FaMedium(size = iconSize) }
+        medium?.let {
+            SocialLinkButton(
+                it
+            ) { FaMedium(size = iconSize) }
+        }
 
     }
 }

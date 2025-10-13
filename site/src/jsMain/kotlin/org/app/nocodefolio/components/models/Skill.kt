@@ -3,7 +3,7 @@ package org.app.nocodefolio.components.models
 import org.app.nocodefolio.components.utils.Res
 
 
-enum class Skill(
+enum class DummySkill(
     val skillName: String,
     val level: String,
     val iconResLight: String,
@@ -12,8 +12,8 @@ enum class Skill(
     AndroidStudio(
         skillName = "Android Studio",
         level = "Skilled",
-        iconResLight = Res.Images.ANDROID_STUDIO_DARK_LOGO,
-        iconResDark = Res.Images.ANDROID_STUDIO_LIGHT_LOGO,
+        iconResLight = "https://cdn.simpleicons.org/androidstudio?format=png&size=12",
+        iconResDark = "https://cdn.simpleicons.org/androidstudio?format=png&size=12",
     ),
     IntellijIdea(
        skillName = "IntelliJ IDEA",

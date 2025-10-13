@@ -32,9 +32,9 @@ fun HomePage(ctx: PageContext) {
 
             Home(currentPalette = currentPalette, userData = userData)
 
-            About()
+            About(userData = userData)
 
-            Projects()
+            Projects(userData = userData)
         }
     }
 

@@ -23,6 +23,7 @@ suspend fun readUserData(path: String): UserData?{
 @Serializable
 data class UserData(
     val name: String = "",
+    val role: String = "",
     val email: String = "",
     val about: String = "",
     val socials: List<Social> = emptyList(),
@@ -47,14 +48,7 @@ data class Skill(
 @Serializable
 data class Social(
     val name: String = "",
+    val iconUrl: String = "",
     val redirectUrl: String = ""
 )
 
-val user = UserData(
-    name = "Muhammed Risvan",
-    email = "risvan@gmail.com",
-    about = "IOS Developer",
-    socials = listOf(Social("GitHub", "github_icon.png"), Social("linkedin","linkedin.com"),Social("instagram","instagram.com")),
-    skills = listOf(Skill("Kotlin", "kotlin_icon.png", "Expert")),
-    projects = listOf(Project("Portfolio App", "image.png", "https://john.dev"))
-)

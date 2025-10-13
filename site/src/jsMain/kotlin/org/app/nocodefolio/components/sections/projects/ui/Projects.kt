@@ -21,6 +21,7 @@ import org.app.nocodefolio.components.sections.about.style.AboutStyle
 import musaib.components.sections.projects.components.RoundedImage
 import musaib.components.sections.projects.components.getAllProjects
 import org.app.nocodefolio.components.SectionDiscriptionStyle
+import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.utils.Res
 import org.app.nocodefolio.components.utils.Res.Constants
 import org.app.nocodefolio.components.widgets.SectionTitle
@@ -28,7 +29,9 @@ import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun Projects() {
+fun Projects(
+    userData: UserData
+) {
     Column (
         modifier = AboutStyle.toModifier().id("projects"),
         verticalArrangement = Arrangement.Center,
@@ -54,13 +57,13 @@ fun Projects() {
             numColumns = numColumns(base = 1, sm = 2, md = 3),
             modifier = Modifier.fillMaxWidth().margin(top = 3.cssRem, bottom = 6.cssRem)
         ) {
-            val allProjects = getAllProjects()
+            val allProjects = userData.projects//getAllProjects()
 
             repeat(allProjects.size) {
                 val project = allProjects[it]
                 RoundedImage(
-                    src = project.first,
-                    navigateTo = project.second
+                    src = project.imageUrl,
+                    navigateTo = project.redirectUrl
                 )
             }
 
