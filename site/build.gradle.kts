@@ -47,7 +47,7 @@ kotlin {
     // This example is frontend only. However, for a fullstack app, you can uncomment the includeServer parameter
     // and the `jvmMain` source set below.
     configAsKobwebApplication("nocodefolio" /*, includeServer = true*/)
-
+    js(IR)
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)
