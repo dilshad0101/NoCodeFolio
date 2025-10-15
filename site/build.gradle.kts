@@ -27,7 +27,6 @@ kobweb {
 }
 
 repositories {
-    /* ... other repositories ... */
     maven(url = "https://jitpack.io")
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     google()
@@ -44,7 +43,7 @@ repositories {
 }
 
 kotlin {
-    // This example is frontend only. However, for a fullstack app, you can uncomment the includeServer parameter
+    // This is frontend only. However, for a fullstack app, you can uncomment the includeServer parameter
     // and the `jvmMain` source set below.
     configAsKobwebApplication("nocodefolio" /*, includeServer = true*/)
     js(IR)
@@ -57,8 +56,6 @@ kotlin {
         jsMain.dependencies {
 
             implementation("dev.bitspittle:firebase-kotlin-bindings:+")
-           // implementation("com.github.stevdza-san:KotlinBootstrap:0.1.6")
-
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)
