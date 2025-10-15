@@ -17,6 +17,7 @@ import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.sections.footer.style.FooterLocationStyle
 import org.app.nocodefolio.components.utils.Res
 import org.app.nocodefolio.toSitePalette
@@ -25,7 +26,8 @@ import kotlin.js.Date
 
 @Composable
 fun DeveloperLocationInfoRow(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    userData: UserData
 ) {
 
     val ctx = rememberPageContext()
@@ -79,7 +81,7 @@ fun DeveloperLocationInfoRow(
         }
 
         FooterSpanText(
-            text = getCopyrightText(),
+            text = getCopyrightText(userData),
             modifier = modifier
                 .fillMaxWidth()
                 .textAlign(TextAlign.Center)
@@ -98,7 +100,7 @@ fun DeveloperLocationInfoRow(
     ){
 
         FooterSpanText(
-            text = getCopyrightText(),
+            text = getCopyrightText(userData),
             modifier = modifier.fillMaxWidth()
         )
 
@@ -122,42 +124,23 @@ fun DeveloperLocationInfoRow(
                 )
 
                 SpanText(
-                    text = Res.Constants.DEVELOPER_LOCATION,
+                    text = userData.country,
                     modifier = FooterLocationStyle.toModifier()
                         .onClick {
-                            ctx.router.navigateTo(Res.Constants.DEVELOPER_LOCATION_ON_MAP)
+//
                         }
 
                 )
 
-                FooterSpanText(
-                    text = "|",
-                    modifier = modifier.padding {
-                        leftRight(.5.cssRem)
-                    }
-                )
-
-                TimeDisplay(timeZone = "Asia/Kolkata")
             }
 
         }
     }
 }
 
-@Composable
-fun LocationAndTime() {
 
-    Row (
-        verticalAlignment = Alignment.CenterVertically
-    ){
-
-
-    }
-}
-
-
-fun getCopyrightText(): String {
+fun getCopyrightText(userData: UserData): String {
 
     val currentYear = Date().getFullYear().toString()
-    return "© $currentYear | ${Res.Constants.COPYRIGHT}"
+    return "© $currentYear | ${userData.name}"
 }

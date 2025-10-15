@@ -13,12 +13,16 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.breakpoint.displayIfAtLeast
 import com.varabyte.kobweb.silk.style.breakpoint.displayUntil
 import com.varabyte.kobweb.silk.style.toModifier
+import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.sections.footer.style.FooterDescriptionStyle
 import org.app.nocodefolio.components.utils.Res
 import org.jetbrains.compose.web.css.cssRem
 
 @Composable
-fun GetInTouchColumn(modifier: Modifier = Modifier) {
+fun GetInTouchColumn(
+    modifier: Modifier = Modifier,
+    userData: UserData
+                     ) {
 
     Column (
         modifier = modifier
@@ -57,7 +61,7 @@ fun GetInTouchColumn(modifier: Modifier = Modifier) {
         ) {
 
             SpanText(
-                text = Res.Constants.GET_IN_TOUCH_DISCRIPTION,
+                text = userData.getInTouchDescription,
                 modifier = FooterDescriptionStyle.toModifier()
             )
         }
@@ -74,7 +78,7 @@ fun GetInTouchColumn(modifier: Modifier = Modifier) {
         ) {
 
             SpanText(
-                text = Res.Constants.GET_IN_TOUCH_DISCRIPTION,
+                text = userData.getInTouchDescription,
                 modifier = FooterDescriptionStyle.toModifier()
             )
 

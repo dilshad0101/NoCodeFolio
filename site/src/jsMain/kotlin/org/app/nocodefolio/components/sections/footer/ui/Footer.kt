@@ -34,13 +34,15 @@ fun Footer(
 
         ) {
 
-            GetInTouchColumn()
+            GetInTouchColumn(
+                userData = userData
+            )
 
             FooterContactRow(
                 modifier = modifier.padding { bottom(4.cssRem) },
                 userData = userData)
 
-            DeveloperLocationInfoRow()
+            DeveloperLocationInfoRow(userData = userData)
         }
 
 

@@ -28,7 +28,10 @@ data class UserData(
     val about: String = "",
     val socials: List<Social> = emptyList(),
     val skills: List<Skill> = emptyList(),
-    val projects: List<Project> = emptyList()
+    val projects: List<Project> = emptyList(),
+    val getInTouchDescription:String = "",
+    val country: String = ""
+
 )
 
 @Serializable
