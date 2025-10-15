@@ -10,6 +10,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
 import com.varabyte.kobweb.core.rememberPageContext
+import com.varabyte.kobweb.navigation.OpenLinkStrategy
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.components.forms.ButtonSize
 import com.varabyte.kobweb.silk.components.text.SpanText
@@ -60,7 +61,8 @@ fun FooterContactRow(
         if(userData.email.isNotBlank()){
             Button(
                 onClick = {
-                    ctx.router.navigateTo(userData.email)
+                    ctx.router.navigateTo("mailto:"+userData.email
+                        )
                 },
                 size = ButtonSize.LG,
                 modifier = MainButtonStyle.toModifier()

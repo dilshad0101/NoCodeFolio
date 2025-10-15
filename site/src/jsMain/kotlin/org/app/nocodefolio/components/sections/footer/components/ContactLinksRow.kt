@@ -22,7 +22,7 @@ fun ContactLinksRow(
 
         if (displayEmail) {
             SocialLinkButton(
-                userData.email
+                "mailto:"+userData.email
             ) { FaEnvelope(size = IconSize.XXL) }
         }
 
