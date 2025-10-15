@@ -10,9 +10,9 @@ $ kobweb run
 ```
 
 ## Kotlin-firebase-binding (Mandatory)
-This project is a collection of bindings for working with various Firebase services in Kotlin/JS.
+This library is a collection of bindings for working with various Firebase services in Kotlin/JS.
 
-*<span style="color:red">THIS PROJECT IS STILL VERY EXPERIMENTAL AND NOT READY FOR PUBLIC USE.</span>*
+*<span style="color:red">THIS LIBRARY IS STILL VERY EXPERIMENTAL AND NOT READY FOR PUBLIC USE.</span>*
 
 The goal of these bindings are to provide a clean, Kotlin-idiomatic view of Firebase web services:
 * JavaScript methods that return `Promise`s are converted to `suspend fun`s in Kotlin
