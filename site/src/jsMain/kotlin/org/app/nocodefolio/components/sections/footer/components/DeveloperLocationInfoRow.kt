@@ -73,11 +73,6 @@ fun DeveloperLocationInfoRow(
 
             }
 
-
-            TimeDisplay(
-                timeZone = "Asia/Kolkata"
-            )
-
         }
 
         FooterSpanText(
