@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.kobweb.silk)
             implementation(libs.silk.icons.fa)
             implementation(libs.kobwebx.markdown)
+            implementation("com.github.stevdza-san:KotlinBootstrap:0.1.6")
         }
 
         // Uncomment the following if you pass `includeServer = true` into the `configAsKobwebApplication` call.

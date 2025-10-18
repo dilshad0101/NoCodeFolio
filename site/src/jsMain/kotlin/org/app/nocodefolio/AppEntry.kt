@@ -48,7 +48,7 @@ fun AppEntry(content: @Composable () -> Unit) {
             colorMode.saveToLocalStorage(COLOR_MODE_KEY)
         }
 
-        Surface(SmoothColorStyle.toModifier().fillMaxHeight()) {
+        Surface(SmoothColorStyle.toModifier()) {
             content()
         }
     }
