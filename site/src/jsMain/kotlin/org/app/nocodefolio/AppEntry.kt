@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
+import com.varabyte.kobweb.compose.ui.modifiers.minHeight
 import com.varabyte.kobweb.compose.ui.modifiers.scrollBehavior
 import com.varabyte.kobweb.core.App
 import com.varabyte.kobweb.silk.SilkApp
@@ -21,6 +22,7 @@ import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import dev.bitspittle.firebase.app.FirebaseApp
 import dev.bitspittle.firebase.app.FirebaseOptions
 import dev.bitspittle.firebase.database.value
+import org.jetbrains.compose.web.css.percent
 import kotlin.js.Json
 import kotlin.js.json
 
@@ -48,7 +50,7 @@ fun AppEntry(content: @Composable () -> Unit) {
             colorMode.saveToLocalStorage(COLOR_MODE_KEY)
         }
 
-        Surface(SmoothColorStyle.toModifier()) {
+        Surface(SmoothColorStyle.toModifier().minHeight(100.percent)) {
             content()
         }
     }
