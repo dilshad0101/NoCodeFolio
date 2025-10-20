@@ -40,6 +40,264 @@ import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 
+import androidx.compose.runtime.*
+import com.varabyte.kobweb.compose.foundation.layout.*
+import com.varabyte.kobweb.silk.components.forms.TextInput
+import com.varabyte.kobweb.silk.components.text.SpanText
+import org.app.nocodefolio.HeadlineTextStyle
+import org.app.nocodefolio.components.SectionDiscriptionStyle
+import org.app.nocodefolio.components.utils.Gap
+import org.jetbrains.compose.web.css.*
+import org.jetbrains.compose.web.dom.Button
+import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Text
+
+@Page("register")
+@Composable
+fun RegisterPage() {
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var about by remember { mutableStateOf("") }
+    var role by remember { mutableStateOf("") }
+
+    // Dynamic fields
+    var projects by remember { mutableStateOf(listOf(Project("", "", ""))) }
+    var socials by remember { mutableStateOf(listOf(Social("", ""))) }
+
+    var message by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .padding(topBottom = 6.cssRem)
+            .padding(leftRight = 2.cssRem),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Div(attrs = HeadlineTextStyle.toAttrs()) {
+            SpanText(
+                text = "Create Your Portfolio",
+                modifier = SectionDiscriptionStyle.toModifier()
+                    .textAlign(TextAlign.Center)
+                    .fontSize(2.5.cssRem)
+                    .color(
+                        when (ColorMode.current) {
+                            ColorMode.LIGHT -> Colors.Gray
+                            ColorMode.DARK -> Colors.LightGray
+                        }
+                    )
+            )
+        }
+
+        Gap(1.5.cssRem)
+        @Composable
+        // Helper composable for input field
+        fun inputField(label: String, value: String, onChange: (String) -> Unit) {
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier
+                    .backgroundColor(rgba(39, 39, 39, 0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.3.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(10.px)
+            ) {
+                SpanText(text = label, modifier = Modifier.color(Colors.LightGray))
+                TextInput(
+                    text = value,
+                    onTextChange = { onChange(it) },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
+
+        // Basic info
+        inputField("Name", name) { name = it }
+        inputField("Email", email) { email = it }
+        inputField("About", about) { about = it }
+        inputField("Role / Profession", role) { role = it }
+
+        Gap(1.cssRem)
+
+        // Projects Section
+        SpanText(
+            text = "Projects",
+            modifier = Modifier.fontSize(1.2.cssRem).color(Colors.LightGray)
+        )
+        projects.forEachIndexed { index, project ->
+            Column(
+                modifier = Modifier
+                    .backgroundColor(rgba(60, 60, 60, 0.5))
+                    .padding(1.cssRem)
+                    .margin(bottom = 0.5.cssRem)
+                    .borderRadius(8.px)
+                    .fillMaxWidth()
+            ) {
+                inputField("Project Name", project.name) { name ->
+                    projects = projects.toMutableList().also { it[index] = it[index].copy(name = name) }
+                }
+                inputField("Image URL", project.imageUrl) { imageurl ->
+                    projects = projects.toMutableList().also { it[index] = it[index].copy(imageUrl = imageurl) }
+                }
+                inputField("Redirect URL", project.redirectUrl) { redirect ->
+                    projects = projects.toMutableList().also { it[index] = it[index].copy(redirectUrl = redirect) }
+                }
+                Button(
+                    attrs = {
+                        style {
+                            backgroundColor(Color("#FF5555"))
+                            color(Color.white)
+                            padding(0.4.cssRem)
+                            borderRadius(5.px)
+                            fontSize(0.9.cssRem)
+                            cursor("pointer")
+                            marginTop(0.5.cssRem)
+                        }
+                        onClick {
+                            projects = projects.filterIndexed { i, _ -> i != index }
+                        }
+                    }
+                ) { Text("Remove Project") }
+            }
+        }
+
+        Button(
+            attrs = {
+                style {
+                    backgroundColor(Color("#0078FF"))
+                    color(Color.white)
+                    padding(0.5.cssRem)
+                    borderRadius(5.px)
+                    fontSize(0.9.cssRem)
+                    cursor("pointer")
+                    marginBottom(1.cssRem)
+                }
+                onClick {
+                    projects = projects + Project("", "", "")
+                }
+            }
+        ) { Text("+ Add Project") }
+
+        // Socials Section
+        SpanText(
+            text = "Social Links",
+            modifier = Modifier.fontSize(1.2.cssRem).color(Colors.LightGray)
+        )
+        socials.forEachIndexed { index, social ->
+            Column(
+                modifier = Modifier
+                    .backgroundColor(rgba(60, 60, 60, 0.5))
+                    .padding(1.cssRem)
+                    .margin(bottom = 0.5.cssRem)
+                    .borderRadius(8.px)
+                    .fillMaxWidth()
+            ) {
+                inputField("Platform Name", social.name) { name ->
+                    socials = socials.toMutableList().also { it[index] = it[index].copy(name = name) }
+                }
+                inputField("Redirect URL", social.redirectUrl) { url ->
+                    socials = socials.toMutableList().also { it[index] = it[index].copy(redirectUrl = url) }
+                }
+                Button(
+                    attrs = {
+                        style {
+                            backgroundColor(Color("#FF5555"))
+                            color(Color.white)
+                            padding(0.4.cssRem)
+                            borderRadius(5.px)
+                            fontSize(0.9.cssRem)
+                            cursor("pointer")
+                            marginTop(0.5.cssRem)
+                        }
+                        onClick {
+                            socials = socials.filterIndexed { i, _ -> i != index }
+                        }
+                    }
+                ) { Text("Remove Social") }
+            }
+        }
+
+        Button(
+            attrs = {
+                style {
+                    backgroundColor(Color("#0078FF"))
+                    color(Color.white)
+                    padding(0.5.cssRem)
+                    borderRadius(5.px)
+                    fontSize(0.9.cssRem)
+                    cursor("pointer")
+                    marginBottom(1.cssRem)
+                }
+                onClick {
+                    socials = socials + Social("", "")
+                }
+            }
+        ) { Text("+ Add Social") }
+
+        Gap(1.cssRem)
+
+        // Register Button
+        Button(
+            attrs = {
+                style {
+                    padding(1.cssRem)
+                    backgroundColor(Color("#00AA55"))
+                    color(Color.white)
+                    borderRadius(8.px)
+                    border(width = 0.px)
+                    fontSize(1.1.cssRem)
+                    cursor("pointer")
+                }
+                onClick {
+                    if (name.isNotBlank() && email.isNotBlank()) {
+                        val userJson = buildJsonString(name, email, about, role, projects, socials)
+                        message = "✅ Data ready:\n$userJson"
+                        // TODO: Send this data to backend or Firestore
+                    } else {
+                        message = "⚠️ Please fill in required fields."
+                    }
+                }
+            }
+        ) { Text("Register") }
+
+        Gap(1.cssRem)
+
+        if (message.isNotBlank()) {
+            SpanText(
+                text = message,
+                modifier = Modifier
+                    .fontSize(1.cssRem)
+                    .color(if (message.contains("✅")) Colors.LightGreen else Colors.Orange)
+            )
+        }
+    }
+}
+
+// Data classes
+data class Project(val name: String, val imageUrl: String, val redirectUrl: String)
+data class Social(val name: String, val redirectUrl: String)
+
+// Helper to build JSON-like string (for testing)
+fun buildJsonString(
+    name: String,
+    email: String,
+    about: String,
+    role: String,
+    projects: List<Project>,
+    socials: List<Social>
+): String {
+    return """
+        {
+          "name": "$name",
+          "email": "$email",
+          "about": "$about",
+          "role": "$role",
+          "projects": ${projects.map { """{"name":"${it.name}", "imageUrl":"${it.imageUrl}", "redirectUrl":"${it.redirectUrl}"}""" }},
+          "socials": ${socials.map { """{"name":"${it.name}", "redirectUrl":"${it.redirectUrl}"}""" }}
+        }
+    """.trimIndent()
+}
+
+
 @Page("index")
 @Composable
 fun LandingPage(){
@@ -70,6 +328,7 @@ fun LandingPage(){
 
             var nameField by remember { mutableStateOf("") }
             var aboutField by remember { mutableStateOf("") }
+
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
