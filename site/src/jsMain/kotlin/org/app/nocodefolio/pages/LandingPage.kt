@@ -149,6 +149,10 @@ fun LandingPage(){
 
             var nameField by remember { mutableStateOf("") }
             var aboutField by remember { mutableStateOf("") }
+            var countryField by remember{ mutableStateOf("")}
+            var getInTouchDescription by remember{ mutableStateOf("")}
+            var emailField by remember { mutableStateOf("") }
+
 
             Column(
                 horizontalAlignment = Alignment.Start,
@@ -169,7 +173,48 @@ fun LandingPage(){
                         nameField = it
                     },
                     modifier = Modifier.fillMaxWidth(),
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Name",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
 
+                TextInput(
+                    text = countryField,
+                    onTextChange = {
+                        countryField = it
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "email",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+
+                TextInput(
+                    text = emailField,
+                    onTextChange = {
+                        emailField = it
+                    },
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
 
@@ -194,6 +239,29 @@ fun LandingPage(){
                         .background(Color.transparent)
                 )
             }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Description",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+                BSTextArea(
+                    value = getInTouchDescription,
+                    onValueChange = {
+                        getInTouchDescription = it
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                        .background(Color.transparent)
+                )
+            }
+
+
         }
 
     }
