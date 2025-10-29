@@ -55,7 +55,7 @@ fun DeveloperLocationInfoRow(
                 FaLocationDot(
                     modifier = modifier
                         .padding(right = .5.cssRem)
-                        .color(ColorMode.current.toSitePalette().discription)
+                        .color(ColorMode.current.toSitePalette().description)
                     ,
                     size = IconSize.XXS
                 )
@@ -113,7 +113,7 @@ fun DeveloperLocationInfoRow(
                 FaLocationDot(
                     modifier = modifier
                         .padding(right = .5.cssRem)
-                        .color(ColorMode.current.toSitePalette().discription)
+                        .color(ColorMode.current.toSitePalette().description)
                     ,
                     size = IconSize.XXS
                 )

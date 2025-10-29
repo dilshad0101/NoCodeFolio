@@ -40,7 +40,7 @@ val FooterTextStyle = CssStyle {
 
     base {
         Modifier
-            .color(colorMode.toSitePalette().discription)
+            .color(colorMode.toSitePalette().description)
     }
 
 
