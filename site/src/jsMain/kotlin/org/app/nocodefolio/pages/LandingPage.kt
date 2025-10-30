@@ -153,7 +153,6 @@ fun LandingPage(){
             var getInTouchDescription by remember{ mutableStateOf("")}
             var emailField by remember { mutableStateOf("") }
 
-
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
