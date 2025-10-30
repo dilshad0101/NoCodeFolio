@@ -41,8 +41,10 @@ import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 
 import androidx.compose.runtime.*
+import com.stevdza.san.kotlinbs.components.BSButton
 import com.stevdza.san.kotlinbs.forms.BSInput
 import com.stevdza.san.kotlinbs.forms.BSTextArea
+import com.stevdza.san.kotlinbs.models.button.ButtonVariant
 import com.varabyte.kobweb.compose.css.BackgroundColor
 import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.*
@@ -60,6 +62,8 @@ import org.app.nocodefolio.components.data.Skill
 import org.app.nocodefolio.components.data.Social
 import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.data.writeUserData
+import org.app.nocodefolio.components.landing.ProjectsField
+import org.app.nocodefolio.components.landing.ProjectsFieldItem
 import org.app.nocodefolio.components.utils.Gap
 import org.app.nocodefolio.toSitePalette
 import org.jetbrains.compose.web.attributes.InputType
@@ -68,7 +72,7 @@ import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Div
 import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.Text
-
+import kotlin.js.iterator
 
 
 @Composable
@@ -152,6 +156,7 @@ fun LandingPage(){
             var countryField by remember{ mutableStateOf("")}
             var getInTouchDescription by remember{ mutableStateOf("")}
             var emailField by remember { mutableStateOf("") }
+            var numberOfProjects by remember { mutableStateOf(0)}
 
             Column(
                 horizontalAlignment = Alignment.Start,
@@ -259,6 +264,43 @@ fun LandingPage(){
                         .background(Color.transparent)
                 )
             }
+            val projects = remember{mutableStateListOf(ProjectsFieldItem())}
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Projects",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+
+                projects.forEachIndexed {index: Int,project: ProjectsFieldItem->
+                    ProjectsField(project,index)
+                }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(0.5.cssRem)
+                ){
+                    BSButton(
+                        text = "Add",
+                        onClick = {
+                            projects.add(ProjectsFieldItem())
+                        }
+                    )
+                    BSButton(
+                        text = "Remove",
+                        onClick = {
+                            projects.removeLastOrNull()
+                        },
+                        variant = ButtonVariant.Secondary,
+                        disabled = projects.size <= 1
+                    )
+                }
+            }
+
 
 
         }

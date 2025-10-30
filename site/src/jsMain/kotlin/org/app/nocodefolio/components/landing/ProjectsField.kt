@@ -7,6 +7,7 @@ import androidx.compose.runtime.setValue
 import com.stevdza.san.kotlinbs.forms.BSInput
 import com.stevdza.san.kotlinbs.forms.BSTextArea
 import com.varabyte.kobweb.compose.css.TextAlign
+import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -26,48 +27,51 @@ import org.jetbrains.compose.web.css.rgba
 
 @Composable
 fun ProjectsField(
-
+    projectsFieldItem: ProjectsFieldItem,
+    index: Int
 ){
-    var projectNameField by mutableStateOf("")
-    var projectCoverImageUrlField by mutableStateOf("")
-    var projectRedirectUrlField by mutableStateOf("")
-
 
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+        modifier = Modifier//.backgroundColor(rgba(39,39,39,0.5))
             .padding(1.2.cssRem)
-            .margin(topBottom = 0.2.cssRem)
             .fillMaxWidth()
-            .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px),
+        verticalArrangement = Arrangement.spacedBy(0.8.cssRem)
     ) {
         SpanText(
-            text = "Projects",
+            text = "Project ${index+1}",
             modifier = Modifier.textAlign(TextAlign.Start)
         )
         TextInput(
-            text = projectNameField,
+            text = projectsFieldItem.projectName,
             onTextChange = {
-                projectNameField = it
+                projectsFieldItem.projectName = it
             },
             placeholder = "Project Name",
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = projectCoverImageUrlField,
+            text = projectsFieldItem.projectImageUrl,
             onTextChange = {
-                projectCoverImageUrlField = it
+                projectsFieldItem.projectImageUrl = it
             },
             placeholder = "Project Cover Image Url",
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = projectRedirectUrlField,
+            text = projectsFieldItem.projectRedirectUrl,
             onTextChange = {
-                projectRedirectUrlField = it
+                projectsFieldItem.projectRedirectUrl = it
             },
-            placeholder = "Project Url. eg: Github ",
+            placeholder = "Project Url. eg: Github Repo Url",
             modifier = Modifier.fillMaxWidth()
         )
     }
 }
+data class ProjectsFieldItem(
+    var projectName: String="",
+    var projectImageUrl: String="",
+    var projectRedirectUrl: String=""
+)
+
