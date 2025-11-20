@@ -64,6 +64,8 @@ import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.data.writeUserData
 import org.app.nocodefolio.components.landing.ProjectsField
 import org.app.nocodefolio.components.landing.ProjectsFieldItem
+import org.app.nocodefolio.components.landing.SkillFieldItem
+import org.app.nocodefolio.components.landing.SkillsField
 import org.app.nocodefolio.components.utils.Gap
 import org.app.nocodefolio.toSitePalette
 import org.jetbrains.compose.web.attributes.InputType
@@ -265,6 +267,7 @@ fun LandingPage(){
                 )
             }
             val projects = remember{mutableStateListOf(ProjectsFieldItem())}
+            val skills = remember{mutableStateListOf(SkillFieldItem())}
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
@@ -279,7 +282,19 @@ fun LandingPage(){
                 )
 
                 projects.forEachIndexed {index: Int,project: ProjectsFieldItem->
-                    ProjectsField(project,index)
+                    ProjectsField(
+                        projectsFieldItem = project,
+                        index = index,
+                        onProjectNameFieldChange = {newValue: String ->
+                            projects[index] = project.copy(projectName = newValue)
+                        },
+                        onProjectImageUrlFieldChange = {newValue: String ->
+                            projects[index] = project.copy(projectImageUrl = newValue)
+                        },
+                        onProjectRedirectUrlFieldChange = {newValue: String ->
+                            projects[index] = project.copy(projectRedirectUrl = newValue)
+                        }
+                        )
                 }
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(0.5.cssRem)
@@ -300,10 +315,53 @@ fun LandingPage(){
                     )
                 }
             }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Skills",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
 
-
-
+                skills.forEachIndexed {index: Int,skill: SkillFieldItem->
+                    SkillsField(
+                        skillFieldItem = skill,
+                        index =index,
+                        onSkillNameFieldChange = { newValue: String ->
+                            skills[index] = skill.copy(skillName = newValue)
+                        },
+                        onSkillIconUrlFieldChange = { newValue: String ->
+                            skills[index] = skill.copy(skillIconUrl = newValue)
+                        },
+                        onSkillLevelFieldChange = { newValue: String ->
+                            skills[index] = skill.copy(skillLevel = newValue)
+                        }
+                        )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(0.5.cssRem)
+                ){
+                    BSButton(
+                        text = "Add",
+                        onClick = {
+                            skills.add(SkillFieldItem())
+                        }
+                    )
+                    BSButton(
+                        text = "Remove",
+                        onClick = {
+                            skills.removeLastOrNull()
+                        },
+                        variant = ButtonVariant.Secondary,
+                        disabled = skills.size <= 1
+                    )
+                }
+            }
         }
-
     }
 }

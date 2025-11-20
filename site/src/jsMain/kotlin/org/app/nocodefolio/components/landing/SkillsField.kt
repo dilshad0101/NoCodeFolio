@@ -1,37 +1,27 @@
 package org.app.nocodefolio.components.landing
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import com.stevdza.san.kotlinbs.forms.BSInput
-import com.stevdza.san.kotlinbs.forms.BSTextArea
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.background
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.silk.components.forms.TextInput
 import com.varabyte.kobweb.silk.components.text.SpanText
-import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.rgba
 
 @Composable
-fun ProjectsField(
-    projectsFieldItem: ProjectsFieldItem,
+fun SkillsField(
+    skillFieldItem: SkillFieldItem,
     index: Int,
-    onProjectNameFieldChange:(String)->Unit,
-    onProjectImageUrlFieldChange:(String)-> Unit,
-    onProjectRedirectUrlFieldChange:(String) -> Unit
+    onSkillNameFieldChange:(String) ->Unit,
+    onSkillLevelFieldChange:(String) -> Unit,
+    onSkillIconUrlFieldChange:(String) -> Unit
 ){
 
     Column(
@@ -47,34 +37,33 @@ fun ProjectsField(
             modifier = Modifier.textAlign(TextAlign.Start)
         )
         TextInput(
-            text = projectsFieldItem.projectName,
+            text = skillFieldItem.skillName,
             onTextChange = {
-                onProjectNameFieldChange.invoke(it)
+                onSkillNameFieldChange.invoke(it)
             },
-            placeholder = "Project Name",
+            placeholder = "Skill eg: HTML/CSS",
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = projectsFieldItem.projectImageUrl,
+            text = skillFieldItem.skillIconUrl,
             onTextChange = {
-                onProjectImageUrlFieldChange.invoke(it)
+                onSkillIconUrlFieldChange.invoke(it)
             },
-            placeholder = "Project Cover Image Url",
+            placeholder = "Icon Url eg: Url to Logo of CSS",
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = projectsFieldItem.projectRedirectUrl,
+            text = skillFieldItem.skillLevel,
             onTextChange = {
-                onProjectRedirectUrlFieldChange.invoke(it)
+                onSkillLevelFieldChange.invoke(it)
             },
-            placeholder = "Project Url. eg: Github Repo Url",
+            placeholder = "Level of Proficiency eg: Expert, Basic",
             modifier = Modifier.fillMaxWidth()
         )
     }
 }
-data class ProjectsFieldItem(
-    val projectName: String="",
-    val projectImageUrl: String="",
-    val projectRedirectUrl: String=""
+data class SkillFieldItem(
+    val skillName: String="",
+    val skillIconUrl: String="",
+    val skillLevel: String=""
 )
-
