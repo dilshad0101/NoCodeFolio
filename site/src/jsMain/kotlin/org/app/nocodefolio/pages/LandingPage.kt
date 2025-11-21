@@ -42,6 +42,11 @@ import com.stevdza.san.kotlinbs.models.button.ButtonVariant
 import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import org.app.nocodefolio.components.data.UserData
+import org.app.nocodefolio.components.data.writeUserData
 import org.app.nocodefolio.components.landing.ProjectsField
 import org.app.nocodefolio.components.landing.Project
 import org.app.nocodefolio.components.landing.Skill
@@ -104,6 +109,7 @@ private fun AddButton(label: String, onAdd: () -> Unit) {
 @Composable
 fun LandingPage(){
     val currentPalette = ColorMode.current.toSitePalette()
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -131,6 +137,7 @@ fun LandingPage(){
             Gap(1.cssRem)
 
             var nameField by remember { mutableStateOf("") }
+            var roleField by remember { mutableStateOf("") }
             var aboutField by remember { mutableStateOf("") }
             var countryField by remember{ mutableStateOf("")}
             var getInTouchDescription by remember{ mutableStateOf("")}
@@ -167,7 +174,7 @@ fun LandingPage(){
                     .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
             ) {
                 SpanText(
-                    text = "Name",
+                    text = "Country",
                     modifier = Modifier.textAlign(TextAlign.Start)
                 )
 
@@ -175,6 +182,27 @@ fun LandingPage(){
                     text = countryField,
                     onTextChange = {
                         countryField = it
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Role",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+
+                TextInput(
+                    text = roleField,
+                    onTextChange = {
+                        roleField = it
                     },
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -387,6 +415,27 @@ fun LandingPage(){
                     )
                 }
             }
+            BSButton(
+                text = "Submit",
+                onClick ={
+                    scope.launch {
+                        writeUserData(
+                            user = UserData(
+                                name = nameField,
+                                role = roleField,
+                                email = emailField,
+                                about = aboutField,
+                                country = countryField,
+                                socials = socials,
+                                skills = skills,
+                                projects = projects,
+                                getInTouchDescription = "Lorem Ipsum" //TODO
+                            ),
+                            userId = "TestUser"
+                        )
+                    }
+                }
+            )
         }
     }
 }
