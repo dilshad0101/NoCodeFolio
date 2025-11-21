@@ -1,33 +1,24 @@
 package org.app.nocodefolio.components.landing
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import com.stevdza.san.kotlinbs.forms.BSInput
-import com.stevdza.san.kotlinbs.forms.BSTextArea
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.modifiers.background
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.silk.components.forms.TextInput
 import com.varabyte.kobweb.silk.components.text.SpanText
-import org.jetbrains.compose.web.css.Color
+import kotlinx.serialization.Serializable
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
-import org.jetbrains.compose.web.css.rgba
 
 @Composable
 fun ProjectsField(
-    projectsFieldItem: ProjectsFieldItem,
+    project: Project,
     index: Int,
     onProjectNameFieldChange:(String)->Unit,
     onProjectImageUrlFieldChange:(String)-> Unit,
@@ -47,7 +38,7 @@ fun ProjectsField(
             modifier = Modifier.textAlign(TextAlign.Start)
         )
         TextInput(
-            text = projectsFieldItem.projectName,
+            text = project.name,
             onTextChange = {
                 onProjectNameFieldChange.invoke(it)
             },
@@ -55,7 +46,7 @@ fun ProjectsField(
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = projectsFieldItem.projectImageUrl,
+            text = project.imageUrl,
             onTextChange = {
                 onProjectImageUrlFieldChange.invoke(it)
             },
@@ -63,7 +54,7 @@ fun ProjectsField(
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = projectsFieldItem.projectRedirectUrl,
+            text = project.redirectUrl,
             onTextChange = {
                 onProjectRedirectUrlFieldChange.invoke(it)
             },
@@ -72,9 +63,10 @@ fun ProjectsField(
         )
     }
 }
-data class ProjectsFieldItem(
-    val projectName: String="",
-    val projectImageUrl: String="",
-    val projectRedirectUrl: String=""
+@Serializable
+data class Project(
+    val name: String="",
+    val imageUrl: String="",
+    val redirectUrl: String=""
 )
 

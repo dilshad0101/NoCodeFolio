@@ -5,11 +5,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.css.ShapeMargin
 import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
-import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
@@ -21,7 +19,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.shapeMargin
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.forms.TextInput
@@ -30,51 +27,31 @@ import com.varabyte.kobweb.silk.style.toAttrs
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.app.nocodefolio.HeadlineTextStyle
-import org.app.nocodefolio.SubheadlineTextStyle
 import org.app.nocodefolio.components.SectionDiscriptionStyle
 import org.app.nocodefolio.components.utils.Gap
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.rgba
-import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Div
 
 import androidx.compose.runtime.*
 import com.stevdza.san.kotlinbs.components.BSButton
-import com.stevdza.san.kotlinbs.forms.BSInput
 import com.stevdza.san.kotlinbs.forms.BSTextArea
 import com.stevdza.san.kotlinbs.models.button.ButtonVariant
-import com.varabyte.kobweb.compose.css.BackgroundColor
 import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.modifiers.*
-import com.varabyte.kobweb.silk.components.forms.InputSize
-import com.varabyte.kobweb.silk.components.forms.TextInput
-import com.varabyte.kobweb.silk.components.text.SpanText
-import kotlinx.coroutines.launch
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.app.nocodefolio.HeadlineTextStyle
-import org.app.nocodefolio.components.SectionDiscriptionStyle
-import org.app.nocodefolio.components.data.Project
-import org.app.nocodefolio.components.data.Skill
-import org.app.nocodefolio.components.data.Social
-import org.app.nocodefolio.components.data.UserData
-import org.app.nocodefolio.components.data.writeUserData
 import org.app.nocodefolio.components.landing.ProjectsField
-import org.app.nocodefolio.components.landing.ProjectsFieldItem
-import org.app.nocodefolio.components.landing.SkillFieldItem
+import org.app.nocodefolio.components.landing.Project
+import org.app.nocodefolio.components.landing.Skill
 import org.app.nocodefolio.components.landing.SkillsField
-import org.app.nocodefolio.components.utils.Gap
+import org.app.nocodefolio.components.landing.Social
+import org.app.nocodefolio.components.landing.SocialsField
 import org.app.nocodefolio.toSitePalette
-import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
-import org.jetbrains.compose.web.dom.Div
-import org.jetbrains.compose.web.dom.Input
 import org.jetbrains.compose.web.dom.Text
-import kotlin.js.iterator
 
 
 @Composable
@@ -266,8 +243,9 @@ fun LandingPage(){
                         .background(Color.transparent)
                 )
             }
-            val projects = remember{mutableStateListOf(ProjectsFieldItem())}
-            val skills = remember{mutableStateListOf(SkillFieldItem())}
+            val projects = remember{mutableStateListOf(Project())}
+            val skills = remember{mutableStateListOf(Skill())}
+            val socials = remember { mutableStateListOf(Social()) }
             Column(
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
@@ -281,18 +259,18 @@ fun LandingPage(){
                     modifier = Modifier.textAlign(TextAlign.Start)
                 )
 
-                projects.forEachIndexed {index: Int,project: ProjectsFieldItem->
+                projects.forEachIndexed {index: Int,project: Project->
                     ProjectsField(
-                        projectsFieldItem = project,
+                        project = project,
                         index = index,
                         onProjectNameFieldChange = {newValue: String ->
-                            projects[index] = project.copy(projectName = newValue)
+                            projects[index] = project.copy(name = newValue)
                         },
                         onProjectImageUrlFieldChange = {newValue: String ->
-                            projects[index] = project.copy(projectImageUrl = newValue)
+                            projects[index] = project.copy(imageUrl = newValue)
                         },
                         onProjectRedirectUrlFieldChange = {newValue: String ->
-                            projects[index] = project.copy(projectRedirectUrl = newValue)
+                            projects[index] = project.copy(redirectUrl = newValue)
                         }
                         )
                 }
@@ -302,7 +280,7 @@ fun LandingPage(){
                     BSButton(
                         text = "Add",
                         onClick = {
-                            projects.add(ProjectsFieldItem())
+                            projects.add(Project())
                         }
                     )
                     BSButton(
@@ -328,15 +306,15 @@ fun LandingPage(){
                     modifier = Modifier.textAlign(TextAlign.Start)
                 )
 
-                skills.forEachIndexed {index: Int,skill: SkillFieldItem->
+                skills.forEachIndexed {index: Int,skill: Skill->
                     SkillsField(
-                        skillFieldItem = skill,
+                        skill = skill,
                         index =index,
                         onSkillNameFieldChange = { newValue: String ->
-                            skills[index] = skill.copy(skillName = newValue)
+                            skills[index] = skill.copy(name = newValue)
                         },
                         onSkillIconUrlFieldChange = { newValue: String ->
-                            skills[index] = skill.copy(skillIconUrl = newValue)
+                            skills[index] = skill.copy(iconUrl = newValue)
                         },
                         onSkillLevelFieldChange = { newValue: String ->
                             skills[index] = skill.copy(skillLevel = newValue)
@@ -349,7 +327,54 @@ fun LandingPage(){
                     BSButton(
                         text = "Add",
                         onClick = {
-                            skills.add(SkillFieldItem())
+                            skills.add(Skill())
+                        }
+                    )
+                    BSButton(
+                        text = "Remove",
+                        onClick = {
+                            skills.removeLastOrNull()
+                        },
+                        variant = ButtonVariant.Secondary,
+                        disabled = skills.size <= 1
+                    )
+                }
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Socials",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+
+                socials.forEachIndexed {index: Int,social: Social->
+                    SocialsField(
+                        social = social,
+                        index =index,
+                        onSocialNameFieldChange = { newValue: String ->
+                            socials[index] = social.copy(name = newValue)
+                        },
+                        onSocialIconUrlFieldChange = { newValue: String ->
+                            socials[index] = social.copy(iconUrl = newValue)
+                        },
+                        onSocialRedirectUrlFieldChange = { newValue: String ->
+                            socials[index] = social.copy(redirectUrl = newValue)
+                        }
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(0.5.cssRem)
+                ){
+                    BSButton(
+                        text = "Add",
+                        onClick = {
+                            skills.add(Skill())
                         }
                     )
                     BSButton(

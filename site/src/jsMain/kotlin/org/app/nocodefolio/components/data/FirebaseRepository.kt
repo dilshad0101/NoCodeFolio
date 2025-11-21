@@ -3,6 +3,9 @@ package org.app.nocodefolio.components.data
 import dev.bitspittle.firebase.database.value
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import org.app.nocodefolio.components.landing.Project
+import org.app.nocodefolio.components.landing.Skill
+import org.app.nocodefolio.components.landing.Social
 
 
 suspend fun writeUserData(userId: String,user: UserData) {
@@ -34,24 +37,5 @@ data class UserData(
 
 )
 
-@Serializable
-data class Project(
-    val name: String = "",
-    val imageUrl: String = "",
-    val redirectUrl: String = ""
-)
 
-@Serializable
-data class Skill(
-    val name: String = "",
-    val iconUrl: String = "",
-    val skillLevel: String = ""
-)
-
-@Serializable
-data class Social(
-    val name: String = "",
-    val iconUrl: String = "",
-    val redirectUrl: String = ""
-)
 

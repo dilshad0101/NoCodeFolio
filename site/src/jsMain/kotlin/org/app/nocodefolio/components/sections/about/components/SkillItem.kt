@@ -13,8 +13,8 @@ import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import org.app.nocodefolio.components.data.Skill
 import org.app.nocodefolio.components.data.UserData
+import org.app.nocodefolio.components.landing.Skill
 import org.jetbrains.compose.web.css.cssRem
 import org.app.nocodefolio.components.sections.about.style.SkillItemImageVariant
 import org.app.nocodefolio.components.styles.SkillProficiencyTextStyle

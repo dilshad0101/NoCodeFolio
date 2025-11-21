@@ -17,12 +17,12 @@ import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
 
 @Composable
-fun SkillsField(
-    skill: Skill,
+fun SocialsField(
+    social: Social,
     index: Int,
-    onSkillNameFieldChange:(String) ->Unit,
-    onSkillLevelFieldChange:(String) -> Unit,
-    onSkillIconUrlFieldChange:(String) -> Unit
+    onSocialNameFieldChange:(String) ->Unit,
+    onSocialIconUrlFieldChange:(String) -> Unit,
+    onSocialRedirectUrlFieldChange:(String) -> Unit
 ){
 
     Column(
@@ -38,34 +38,36 @@ fun SkillsField(
             modifier = Modifier.textAlign(TextAlign.Start)
         )
         TextInput(
-            text = skill.name,
+            text = social.name,
             onTextChange = {
-                onSkillNameFieldChange.invoke(it)
+                onSocialNameFieldChange.invoke(it)
             },
-            placeholder = "Skill eg: HTML/CSS",
+            placeholder = "Social eg: Linkedin",
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = skill.iconUrl,
+            text = social.iconUrl,
             onTextChange = {
-                onSkillIconUrlFieldChange.invoke(it)
+                onSocialIconUrlFieldChange.invoke(it)
             },
-            placeholder = "Icon Url eg: Url to Logo of CSS",
+            placeholder = "Icon Url eg: Url to Logo of Twitter",
             modifier = Modifier.fillMaxWidth()
         )
         TextInput(
-            text = skill.skillLevel,
+            text = social.redirectUrl,
             onTextChange = {
-                onSkillLevelFieldChange.invoke(it)
+                onSocialRedirectUrlFieldChange.invoke(it)
             },
-            placeholder = "Level of Proficiency eg: Expert, Basic",
+            placeholder = "Profile Url",
             modifier = Modifier.fillMaxWidth()
         )
     }
 }
+
+
 @Serializable
-data class Skill(
-    val name: String="",
-    val iconUrl: String="",
-    val skillLevel: String=""
+data class Social(
+    val name: String = "",
+    val iconUrl: String = "",
+    val redirectUrl: String = ""
 )
