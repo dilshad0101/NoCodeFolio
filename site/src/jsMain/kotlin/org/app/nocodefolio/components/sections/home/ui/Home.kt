@@ -73,7 +73,7 @@ fun Home(
                 modifier = UserNameStyle.toModifier()
             )
             SpanText(
-                text = userData.about,
+                text = userData.role,
                 modifier = UsersMessageStyle.toModifier()
                     .color(currentPalette.subHeadLine)
             )

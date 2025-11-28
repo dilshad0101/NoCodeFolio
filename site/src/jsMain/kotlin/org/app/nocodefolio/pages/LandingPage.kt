@@ -521,7 +521,6 @@ fun LandingPage(){
                             userId = usernameField,
                         )
                         if((readUserData(usernameField) != null)){
-                            delay(1700)
                             buttonLoading = false
                             isSuccessAlert = true
 

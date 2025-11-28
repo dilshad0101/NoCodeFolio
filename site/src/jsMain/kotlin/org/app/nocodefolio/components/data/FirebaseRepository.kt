@@ -10,10 +10,13 @@ import org.app.nocodefolio.components.landing.Social
 
 
 suspend fun writeUserData(userId: String,user: UserData) {
-    val db = app.getDatabase()
-    val jsonStr = Json.encodeToString(user)
-    val jsonObj = JSON.parse<dynamic>(jsonStr)
-    db.ref("users/$userId").set(jsonObj)
+    if (userId.isNotBlank() || userId.isNotEmpty()){
+        val db = app.getDatabase()
+        val jsonStr = Json.encodeToString(user)
+        val jsonObj = JSON.parse<dynamic>(jsonStr)
+        db.ref("users/$userId").update(jsonObj)
+    }
+
 }
 suspend fun readUserData(path: String): UserData?{
 
