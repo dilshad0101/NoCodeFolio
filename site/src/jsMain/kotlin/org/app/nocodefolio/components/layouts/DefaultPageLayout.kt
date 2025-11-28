@@ -6,6 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.stevdza.san.kotlinbs.components.BSSpinner
+import com.stevdza.san.kotlinbs.models.SpinnerVariant
 import com.varabyte.kobweb.browser.util.kebabCaseToCamelCase
 import com.varabyte.kobweb.browser.util.kebabCaseToTitleCamelCase
 import com.varabyte.kobweb.browser.util.titleCamelCaseToKebabCase
@@ -26,8 +28,13 @@ import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.data.readUserData
 import org.app.nocodefolio.components.utils.Res
 import org.app.nocodefolio.components.widgets.SVGHeroBackround
+import org.jetbrains.compose.web.css.AlignContent
+import org.jetbrains.compose.web.css.DisplayStyle
+import org.jetbrains.compose.web.css.FlexWrap
+import org.jetbrains.compose.web.css.JustifyContent
 import org.jetbrains.compose.web.css.Position
 import org.jetbrains.compose.web.css.fr
+import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.vh
 import org.jetbrains.compose.web.dom.Text
@@ -44,6 +51,7 @@ fun DefaultPageLayout(
     }
 
     Box(
+        contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxSize()
             .position(Position.Relative)
@@ -58,9 +66,7 @@ fun DefaultPageLayout(
                     .displayUntil(Breakpoint.MD)
                     .top((-50).px)
                     .left((-50).px)
-                    .height(28.vh)
-
-                ,
+                    .height(28.vh),
                 src = Res.Images.GREEN_CIRCE
             )
 
@@ -74,7 +80,6 @@ fun DefaultPageLayout(
                 ,
                 src = Res.Images.WAVES
             )
-
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -88,9 +93,15 @@ fun DefaultPageLayout(
         }else{
             Box(
                 contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .position(Position.Fixed)  // overlays entire screen
+                    .top(0.px)
+                    .left(0.px)
+                    .right(0.px)
+                    .bottom(0.px)
             ) {
-                Text("Loading Content..")
+                BSSpinner(variant = SpinnerVariant.DefaultGrow)
             }
         }
     }
