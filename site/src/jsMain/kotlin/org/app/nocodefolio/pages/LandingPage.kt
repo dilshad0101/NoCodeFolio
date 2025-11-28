@@ -47,6 +47,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.data.writeUserData
+import org.app.nocodefolio.components.landing.ActionButton
 import org.app.nocodefolio.components.landing.ProjectsField
 import org.app.nocodefolio.components.landing.Project
 import org.app.nocodefolio.components.landing.Skill
@@ -143,6 +144,8 @@ fun LandingPage(){
             var countryField by remember{ mutableStateOf("")}
             var getInTouchDescription by remember{ mutableStateOf("")}
             var emailField by remember { mutableStateOf("") }
+            var actionButtonText by remember{ mutableStateOf("")}
+            var actionButtonRedirectUrl by remember{mutableStateOf("")}
             var numberOfProjects by remember { mutableStateOf(0)}
 
             Column(
@@ -157,7 +160,6 @@ fun LandingPage(){
                     text = "Name",
                     modifier = Modifier.textAlign(TextAlign.Start),
                 )
-
                 TextInput(
                     text = nameField,
                     onTextChange = {
@@ -238,7 +240,7 @@ fun LandingPage(){
                     .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
             ) {
                 SpanText(
-                    text = "email",
+                    text = "Email",
                     modifier = Modifier.textAlign(TextAlign.Start)
                 )
 
@@ -270,6 +272,7 @@ fun LandingPage(){
                     },
                     modifier = Modifier.fillMaxWidth()
                         .background(Color.transparent)
+                        .color(currentPalette.description)
                 )
             }
             Column(
@@ -290,7 +293,50 @@ fun LandingPage(){
                         getInTouchDescription = it
                     },
                     modifier = Modifier.fillMaxWidth()
+                        .color(currentPalette.description)
                         .background(Color.transparent)
+                )
+            }
+
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Action Button Text",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+                TextInput(
+                    text = actionButtonText,
+                    onTextChange = {
+                        actionButtonText = it
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Url to redirect when button is clicked",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+                TextInput(
+                    text = actionButtonRedirectUrl,
+                    onTextChange = {
+                        actionButtonRedirectUrl = it
+                    },
+                    modifier = Modifier.fillMaxWidth(),
                 )
             }
 
@@ -323,7 +369,7 @@ fun LandingPage(){
                         onProjectRedirectUrlFieldChange = {newValue: String ->
                             projects[index] = project.copy(redirectUrl = newValue)
                         }
-                        )
+                    )
                 }
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(0.5.cssRem)
@@ -452,9 +498,14 @@ fun LandingPage(){
                                 socials = socials,
                                 skills = skills,
                                 projects = projects,
-                                getInTouchDescription =  getInTouchDescription
+                                getInTouchDescription =  getInTouchDescription,
+                                actionButton = ActionButton(
+                                    buttonText = actionButtonText,
+                                    buttonRedirectUrl = actionButtonRedirectUrl
+                                )
                             ),
-                            userId = usernameField
+                            userId = usernameField,
+
                         )
                     }
                 }

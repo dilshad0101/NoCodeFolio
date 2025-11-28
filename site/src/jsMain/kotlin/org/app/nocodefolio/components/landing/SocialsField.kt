@@ -71,3 +71,9 @@ data class Social(
     val iconUrl: String = "",
     val redirectUrl: String = ""
 )
+
+@Serializable
+data class ActionButton(
+    val buttonText: String = "",
+    val buttonRedirectUrl: String = ""
+)

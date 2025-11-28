@@ -59,12 +59,10 @@ fun Home(
                     timingFunction = AnimationTimingFunction.cubicBezier(
                         0.4, 0.0, 1.0, 1.0
                     ),
-
                 )),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
-
             SpanText(
                 text = Res.Constants.GREETING,
                 modifier = HelloImStyle.toModifier()
@@ -73,20 +71,16 @@ fun Home(
             SpanText(
                 text = userData.name,
                 modifier = UserNameStyle.toModifier()
-
-
             )
             SpanText(
                 text = userData.about,
                 modifier = UsersMessageStyle.toModifier()
                     .color(currentPalette.subHeadLine)
-
             )
 
             val ctx = rememberPageContext()
 
             val breakpoint = rememberBreakpoint()
-
 
             SocialLinksRow(
                 breakpoint = breakpoint,
