@@ -74,19 +74,22 @@ fun Projects(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Link(
-                        path = Constants.PROJECT_REPOSITORIES_URL,
-                        text = Constants.MORE_ON_GITHUB,
-                        modifier = Modifier
-                            .color(
-                                when (ColorMode.current) {
-                                    ColorMode.LIGHT -> Colors.Black
-                                    ColorMode.DARK -> Colors.White
-                                }
-                            )
-                            .margin(right = 8.px)
-                    )
-                    FaUpRightFromSquare()
+                    userData.socials.find {it.name.lowercase()== "github"}?.name?.let {
+                        Link(
+                            path = it,
+                            text = Constants.MORE_ON_GITHUB,
+                            modifier = Modifier
+                                .color(
+                                    when (ColorMode.current) {
+                                        ColorMode.LIGHT -> Colors.Black
+                                        ColorMode.DARK -> Colors.White
+                                    }
+                                )
+                                .margin(right = 8.px)
+                        )
+                        FaUpRightFromSquare()
+
+                    }
 
                 }
             }
