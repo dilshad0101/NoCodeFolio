@@ -47,9 +47,7 @@ fun About(
                     }
                 )
                 .lineHeight(2)
-
         )
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,

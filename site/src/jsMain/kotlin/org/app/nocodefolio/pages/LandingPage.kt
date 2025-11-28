@@ -259,7 +259,7 @@ fun LandingPage(){
                     .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
             ) {
                 SpanText(
-                    text = "Description",
+                    text = "Contact Section Description",
                     modifier = Modifier.textAlign(TextAlign.Start)
                 )
                 BSTextArea(
@@ -271,6 +271,7 @@ fun LandingPage(){
                         .background(Color.transparent)
                 )
             }
+
             val projects = remember{mutableStateListOf(Project())}
             val skills = remember{mutableStateListOf(Skill())}
             val socials = remember { mutableStateListOf(Social()) }
@@ -429,7 +430,7 @@ fun LandingPage(){
                                 socials = socials,
                                 skills = skills,
                                 projects = projects,
-                                getInTouchDescription = "Lorem Ipsum" //TODO
+                                getInTouchDescription =  getInTouchDescription
                             ),
                             userId = "TestUser"
                         )

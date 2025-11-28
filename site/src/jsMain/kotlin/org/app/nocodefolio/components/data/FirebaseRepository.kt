@@ -19,7 +19,6 @@ suspend fun readUserData(path: String): UserData?{
     val data = app.getDatabase().ref("users/$path").get().value()
     val json = JSON.stringify(data)
     return Json.decodeFromString(   json)
-
 }
 
 

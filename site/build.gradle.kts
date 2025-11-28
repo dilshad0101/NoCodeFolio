@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
     alias(libs.plugins.kotlin.serialization)
-
 }
 
 group = "org.app.nocodefolio"
@@ -64,10 +63,5 @@ kotlin {
             implementation(libs.kobwebx.markdown)
             implementation("com.github.stevdza-san:KotlinBootstrap:0.1.6")
         }
-
-        // Uncomment the following if you pass `includeServer = true` into the `configAsKobwebApplication` call.
-//        jvmMain.dependencies {
-//            compileOnly(libs.kobweb.api) // Provided by Kobweb backend at runtime
-//        }
     }
 }

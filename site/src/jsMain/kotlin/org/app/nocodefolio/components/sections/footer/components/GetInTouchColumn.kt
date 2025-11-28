@@ -47,7 +47,7 @@ fun GetInTouchColumn(
             )
         }
 
-        // Discription
+        // Description
 
         // For Size SM & Below
         Column (
