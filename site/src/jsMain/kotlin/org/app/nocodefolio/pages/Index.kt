@@ -32,7 +32,6 @@ fun HomePage(ctx: PageContext) {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
-
             val currentPalette = ColorMode.current.toSitePalette()
 
             Home(currentPalette = currentPalette, userData = userData)

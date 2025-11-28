@@ -137,6 +137,7 @@ fun LandingPage(){
             Gap(1.cssRem)
 
             var nameField by remember { mutableStateOf("") }
+            var usernameField by remember { mutableStateOf("")}
             var roleField by remember { mutableStateOf("") }
             var aboutField by remember { mutableStateOf("") }
             var countryField by remember{ mutableStateOf("")}
@@ -154,13 +155,34 @@ fun LandingPage(){
             ) {
                 SpanText(
                     text = "Name",
-                    modifier = Modifier.textAlign(TextAlign.Start)
+                    modifier = Modifier.textAlign(TextAlign.Start),
                 )
 
                 TextInput(
                     text = nameField,
                     onTextChange = {
                         nameField = it
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+                modifier = Modifier.backgroundColor(rgba(39,39,39,0.5))
+                    .padding(1.2.cssRem)
+                    .margin(topBottom = 0.2.cssRem)
+                    .fillMaxWidth()
+                    .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+            ) {
+                SpanText(
+                    text = "Username",
+                    modifier = Modifier.textAlign(TextAlign.Start)
+                )
+
+                TextInput(
+                    text = usernameField,
+                    onTextChange = {
+                        usernameField = it
                     },
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -432,7 +454,7 @@ fun LandingPage(){
                                 projects = projects,
                                 getInTouchDescription =  getInTouchDescription
                             ),
-                            userId = "TestUser"
+                            userId = usernameField
                         )
                     }
                 }
