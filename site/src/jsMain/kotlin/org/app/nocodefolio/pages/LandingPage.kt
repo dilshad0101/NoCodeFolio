@@ -36,16 +36,22 @@ import org.jetbrains.compose.web.css.rgba
 import org.jetbrains.compose.web.dom.Div
 
 import androidx.compose.runtime.*
+import com.stevdza.san.kotlinbs.components.BSAlert
 import com.stevdza.san.kotlinbs.components.BSButton
 import com.stevdza.san.kotlinbs.forms.BSTextArea
+import com.stevdza.san.kotlinbs.models.AlertIcon
+import com.stevdza.san.kotlinbs.models.AlertStyle
 import com.stevdza.san.kotlinbs.models.button.ButtonVariant
 import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import kotlinx.browser.window
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.app.nocodefolio.components.data.UserData
+import org.app.nocodefolio.components.data.readUserData
 import org.app.nocodefolio.components.data.writeUserData
 import org.app.nocodefolio.components.landing.ActionButton
 import org.app.nocodefolio.components.landing.ProjectsField
@@ -54,6 +60,8 @@ import org.app.nocodefolio.components.landing.Skill
 import org.app.nocodefolio.components.landing.SkillsField
 import org.app.nocodefolio.components.landing.Social
 import org.app.nocodefolio.components.landing.SocialsField
+import org.app.nocodefolio.pages.components.DismissibleAlert
+import org.app.nocodefolio.pages.components.injectAlertStyles
 import org.app.nocodefolio.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
@@ -111,6 +119,7 @@ private fun AddButton(label: String, onAdd: () -> Unit) {
 fun LandingPage(){
     val currentPalette = ColorMode.current.toSitePalette()
     val scope = rememberCoroutineScope()
+    injectAlertStyles()
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -471,23 +480,28 @@ fun LandingPage(){
                     BSButton(
                         text = "Add",
                         onClick = {
-                            skills.add(Skill())
+                            socials.add(Social())
                         }
                     )
                     BSButton(
                         text = "Remove",
                         onClick = {
-                            skills.removeLastOrNull()
+                            socials.removeLastOrNull()
                         },
                         variant = ButtonVariant.Secondary,
-                        disabled = skills.size <= 1
+                        disabled = socials.size <= 1
                     )
                 }
             }
+            var isSuccessAlert by remember{mutableStateOf(false)}
+            var buttonLoading by remember{ mutableStateOf(false)}
             BSButton(
                 text = "Submit",
+                loading = buttonLoading,
+                loadingText = "Submitting...",
                 onClick ={
                     scope.launch {
+                        buttonLoading = true
                         writeUserData(
                             user = UserData(
                                 name = nameField,
@@ -505,11 +519,33 @@ fun LandingPage(){
                                 )
                             ),
                             userId = usernameField,
-
                         )
+                        if((readUserData(usernameField) != null)){
+                            delay(1700)
+                            buttonLoading = false
+                            isSuccessAlert = true
+
+                        }
                     }
                 }
             )
+            if(isSuccessAlert){
+                val url = window.location.href+usernameField
+                Box(
+                    modifier = Modifier.padding(
+                        top = 5.vh
+                    )
+                ){
+                    DismissibleAlert(
+                        message = "Success! Your portfolio has been created. ",
+                        linkText = "Visit",
+                        linkUrl = url,
+                        onDismiss = { isSuccessAlert != isSuccessAlert }
+                    )
+
+                }
+            }
+
         }
     }
 }
