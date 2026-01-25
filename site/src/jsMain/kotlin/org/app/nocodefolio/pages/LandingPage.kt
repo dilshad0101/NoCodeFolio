@@ -45,6 +45,8 @@ import com.stevdza.san.kotlinbs.models.button.ButtonVariant
 import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.*
 import com.varabyte.kobweb.compose.ui.modifiers.*
+import com.varabyte.kobweb.compose.ui.styleModifier
+import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import kotlinx.browser.window
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -66,6 +68,7 @@ import org.app.nocodefolio.toSitePalette
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Button
 import org.jetbrains.compose.web.dom.Text
+import org.w3c.dom.css.CSSStyleSheet
 
 
 @Composable
@@ -117,15 +120,24 @@ private fun AddButton(label: String, onAdd: () -> Unit) {
 @Page("index")
 @Composable
 fun LandingPage(){
+
+
     val currentPalette = ColorMode.current.toSitePalette()
     val scope = rememberCoroutineScope()
     injectAlertStyles()
-
     Column(
         modifier = Modifier.fillMaxSize()
-            .padding(topBottom = 10.cssRem),
+            .background(rgb(26, 26, 26))
+            .color(Colors.White)
+            .styleModifier {
+                // Tells the browser: "This page is intended to be dark"
+                // This prevents browsers from trying to "invert" it themselves
+                property("color-scheme", "dark")
+            }
+            .padding(topBottom = 8.cssRem, leftRight = 1.cssRem),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+
     ) {
         Column {
             Div(
@@ -138,7 +150,7 @@ fun LandingPage(){
                         .fontSize(3.cssRem)
                         .color(
                             when (ColorMode.current) {
-                                ColorMode.LIGHT -> Colors.Gray
+                                ColorMode.LIGHT -> Colors.LightGray //Colors.Gray
                                 ColorMode.DARK -> Colors.LightGray
                             }
                         )
@@ -174,7 +186,13 @@ fun LandingPage(){
                     onTextChange = {
                         nameField = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        ),
                 )
             }
             Column(
@@ -195,7 +213,13 @@ fun LandingPage(){
                     onTextChange = {
                         usernameField = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        ),
                 )
             }
             Column(
@@ -209,6 +233,7 @@ fun LandingPage(){
                 SpanText(
                     text = "Country",
                     modifier = Modifier.textAlign(TextAlign.Start)
+
                 )
 
                 TextInput(
@@ -216,7 +241,13 @@ fun LandingPage(){
                     onTextChange = {
                         countryField = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        ),
                 )
             }
             Column(
@@ -237,7 +268,13 @@ fun LandingPage(){
                     onTextChange = {
                         roleField = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        )
                 )
             }
             Column(
@@ -251,6 +288,7 @@ fun LandingPage(){
                 SpanText(
                     text = "Email",
                     modifier = Modifier.textAlign(TextAlign.Start)
+
                 )
 
                 TextInput(
@@ -258,7 +296,12 @@ fun LandingPage(){
                     onTextChange = {
                         emailField = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth() .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        )
                 )
             }
 
@@ -280,8 +323,15 @@ fun LandingPage(){
                         aboutField = it
                     },
                     modifier = Modifier.fillMaxWidth()
+                        .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
                         .background(Color.transparent)
-                        .color(currentPalette.description)
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        )
+
                 )
             }
             Column(
@@ -302,8 +352,15 @@ fun LandingPage(){
                         getInTouchDescription = it
                     },
                     modifier = Modifier.fillMaxWidth()
-                        .color(currentPalette.description)
+                       // .color(currentPalette.description)
                         .background(Color.transparent)
+                        .color(Color.white)
+                        .borderRadius(topLeftAndBottomRight = 10.px, topRightAndBottomLeft = 10.px)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        )
                 )
             }
 
@@ -324,7 +381,13 @@ fun LandingPage(){
                     onTextChange = {
                         actionButtonText = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        )
                 )
             }
 
@@ -345,7 +408,13 @@ fun LandingPage(){
                     onTextChange = {
                         actionButtonRedirectUrl = it
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .color(Color.white)
+                        .border(
+                            width = 1.px,
+                            style = LineStyle.Solid,
+                            color = rgba(242, 242, 242, 0.3)
+                        )
                 )
             }
 

@@ -6,15 +6,20 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.silk.components.forms.TextInput
 import com.varabyte.kobweb.silk.components.text.SpanText
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 
 @Composable
 fun SocialsField(
@@ -44,6 +49,12 @@ fun SocialsField(
             },
             placeholder = "Social eg: Linkedin",
             modifier = Modifier.fillMaxWidth()
+                .color(Color.white)
+                .border(
+                    width = 1.px,
+                    style = LineStyle.Solid,
+                    color = rgba(242, 242, 242, 0.3)
+                )
         )
         TextInput(
             text = social.iconUrl,
@@ -52,6 +63,12 @@ fun SocialsField(
             },
             placeholder = "Icon Url eg: Url to Logo of Twitter",
             modifier = Modifier.fillMaxWidth()
+                .color(Color.white)
+                .border(
+                    width = 1.px,
+                    style = LineStyle.Solid,
+                    color = rgba(242, 242, 242, 0.3)
+                )
         )
         TextInput(
             text = social.redirectUrl,
@@ -60,6 +77,12 @@ fun SocialsField(
             },
             placeholder = "Profile Url",
             modifier = Modifier.fillMaxWidth()
+                .color(Color.white)
+                .border(
+                    width = 1.px,
+                    style = LineStyle.Solid,
+                    color = rgba(242, 242, 242, 0.3)
+                )
         )
     }
 }

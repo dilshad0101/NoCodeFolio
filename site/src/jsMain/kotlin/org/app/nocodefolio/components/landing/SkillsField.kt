@@ -6,15 +6,20 @@ import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
+import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
+import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.textAlign
 import com.varabyte.kobweb.silk.components.forms.TextInput
 import com.varabyte.kobweb.silk.components.text.SpanText
 import kotlinx.serialization.Serializable
+import org.jetbrains.compose.web.css.Color
+import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.rgba
 
 @Composable
 fun SkillsField(
@@ -44,6 +49,12 @@ fun SkillsField(
             },
             placeholder = "Skill eg: HTML/CSS",
             modifier = Modifier.fillMaxWidth()
+                .color(Color.white)
+                .border(
+                    width = 1.px,
+                    style = LineStyle.Solid,
+                    color = rgba(242, 242, 242, 0.3)
+                )
         )
         TextInput(
             text = skill.iconUrl,
@@ -52,6 +63,12 @@ fun SkillsField(
             },
             placeholder = "Icon Url eg: Url to Logo of CSS",
             modifier = Modifier.fillMaxWidth()
+                .color(Color.white)
+                .border(
+                    width = 1.px,
+                    style = LineStyle.Solid,
+                    color = rgba(242, 242, 242, 0.3)
+                )
         )
         TextInput(
             text = skill.skillLevel,
@@ -60,6 +77,12 @@ fun SkillsField(
             },
             placeholder = "Level of Proficiency eg: Expert, Basic",
             modifier = Modifier.fillMaxWidth()
+                .color(Color.white)
+                .border(
+                    width = 1.px,
+                    style = LineStyle.Solid,
+                    color = rgba(242, 242, 242, 0.3)
+                )
         )
     }
 }
