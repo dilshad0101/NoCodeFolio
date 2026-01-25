@@ -1,4 +1,4 @@
-package musaib.components.sections.projects.ui
+package org.app.nocodefolio.components.sections.projects.ui
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -19,11 +19,11 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.app.nocodefolio.components.sections.about.style.AboutStyle
 import musaib.components.sections.projects.components.RoundedImage
-import musaib.components.sections.projects.components.getAllProjects
 import org.app.nocodefolio.components.SectionDiscriptionStyle
 import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.utils.Res
 import org.app.nocodefolio.components.utils.Res.Constants
+import org.app.nocodefolio.components.utils.ensureHttps
 import org.app.nocodefolio.components.widgets.SectionTitle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
@@ -76,7 +76,7 @@ fun Projects(
                 ) {
                     userData.socials.find {it.name.lowercase()== "github"}?.name?.let {
                         Link(
-                            path = it,
+                            path = ensureHttps(it),
                             text = Constants.MORE_ON_GITHUB,
                             modifier = Modifier
                                 .color(

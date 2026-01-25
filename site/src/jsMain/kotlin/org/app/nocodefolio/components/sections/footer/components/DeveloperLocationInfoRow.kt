@@ -61,10 +61,11 @@ fun DeveloperLocationInfoRow(
                 )
 
                 SpanText(
-                    text = Res.Constants.DEVELOPER_LOCATION,
+                    text = userData.country,
                     modifier = FooterLocationStyle.toModifier()
                         .onClick {
-                            ctx.router.navigateTo(Res.Constants.DEVELOPER_LOCATION_ON_MAP)
+                            ctx.router.navigateTo(
+                                "https://www.google.com/maps/search/?api=1&query=${userData.country}")
                         }
                         .width(6.cssRem)
 

@@ -17,6 +17,7 @@ import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
 import org.jetbrains.compose.web.css.px
 import org.app.nocodefolio.components.utils.Res
+import org.app.nocodefolio.components.utils.ensureHttps
 
 @Composable
 fun RoundedImage(
@@ -30,7 +31,7 @@ fun RoundedImage(
         modifier = Modifier.fillMaxSize().padding(5.px).borderRadius(10.px).then(modifier).cursor(Cursor.Pointer)
             .onClick {
                 navigateTo?.let {
-                    ctx.router.navigateTo(it)
+                    ctx.router.navigateTo(ensureHttps(it))
                 }
             }
     ) {

@@ -16,6 +16,7 @@ import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.app.nocodefolio.components.data.UserData
 import org.app.nocodefolio.components.styles.SocialLinkStyle
 import org.app.nocodefolio.components.utils.Res
+import org.app.nocodefolio.components.utils.ensureHttps
 import org.app.nocodefolio.components.widgets.LinkButton
 import org.jetbrains.compose.web.css.cssRem
 
@@ -106,7 +107,7 @@ internal fun SocialLinkButton(
     icon: @Composable () -> Unit
 ) {
     LinkButton(
-        url,
+        ensureHttps(url),
         modifier =  SocialLinkStyle.toModifier()
             .color(
             when (ColorMode.current) {

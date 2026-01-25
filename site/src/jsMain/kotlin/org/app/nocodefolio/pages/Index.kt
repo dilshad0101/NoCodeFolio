@@ -1,22 +1,16 @@
 package org.app.nocodefolio.pages
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxSize
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.PageContext
-import com.varabyte.kobweb.silk.components.forms.TextInput
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.app.nocodefolio.components.sections.about.ui.About
 import org.app.nocodefolio.components.sections.home.ui.Home
-import musaib.components.sections.projects.ui.Projects
+import org.app.nocodefolio.components.sections.projects.ui.Projects
 import org.app.nocodefolio.components.layouts.DefaultPageLayout
 import org.app.nocodefolio.toSitePalette
 

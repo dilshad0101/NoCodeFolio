@@ -33,6 +33,7 @@ import org.app.nocodefolio.components.sections.home.style.HeroContainerKeyFrames
 import org.app.nocodefolio.components.sections.home.style.HeroSectionStyle
 import org.app.nocodefolio.components.sections.home.style.UserNameStyle
 import org.app.nocodefolio.components.sections.home.style.UsersMessageStyle
+import org.app.nocodefolio.components.utils.ensureHttps
 import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.s
@@ -97,7 +98,7 @@ fun Home(
 
                 Button(
                     onClick = {
-                        ctx.router.navigateTo(Res.Constants.RESUME_URL)
+                        ctx.router.navigateTo(ensureHttps(userData.actionButton.buttonRedirectUrl))
                     },
                     size = ButtonSize.LG,
                     modifier = MainButtonStyle.toModifier()
@@ -105,7 +106,7 @@ fun Home(
 
                 ) {
                     SpanText(
-                        text = Res.Constants.RESUME,
+                        text = userData.actionButton.buttonText,
                         modifier = Modifier
                             .color(currentPalette.buttonText)
                     )
