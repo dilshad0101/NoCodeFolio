@@ -1,4 +1,29 @@
-This is a [Kobweb](https://github.com/varabyte/kobweb) project bootstrapped with the `app` template.
+# 🚀 Nocodefolio
+
+A no-code portfolio generation platform built using **Kotlin Compose HTML (Compose for Web)** that enables users to create and host personal portfolio websites without writing any code.
+
+---
+
+## 📖 Overview
+
+Nocodefolio simplifies the process of creating developer portfolios by providing a form-based interface where users can enter their personal and professional details, and instantly receive a fully generated portfolio website.
+
+Each user receives a unique portfolio route:
+
+```text
+nocodefolio.com/username
+```
+
+For example:
+
+```text
+nocodefolio.com/james
+```
+
+When **James** fills out the portfolio form, the platform automatically generates and hosts his personalized portfolio website at the above URL.
+
+
+This is a [Kobweb](https://github.com/varabyte/kobweb) project 
 
 ## Getting Started
 
