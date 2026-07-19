@@ -1,13 +1,11 @@
 # 🚀 Nocodefolio
 
-A no-code portfolio generation platform built using **Kotlin Compose HTML (Compose for Web)** that enables users to create and host personal portfolio websites without writing any code.
-
+A no-code portfolio generation platform that enables users to create and host personal portfolio websites without writing any code.
 ---
 
 ## 📖 Overview
 
-Nocodefolio simplifies the process of creating developer portfolios by providing a form-based interface where users can enter their personal and professional details, and instantly receive a fully generated portfolio website.
-
+NoCodeFolio is a web platform built using Kotlin, Kobweb, and Compose HTML, allowing users to generate professional portfolio websites by simply filling out a form.
 Each user receives a unique portfolio route:
 
 ```text
